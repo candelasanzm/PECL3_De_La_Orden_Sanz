@@ -37,20 +37,20 @@ from pecl3.final.final_persona, pecl3.final.final_vehiculos
 where final_vehiculos.vehicle_type = 'Pick-up';
 
 -- Sentencia 7
-select count(cv.unique_id) as NumeroAccidentes, v.vehicle_make
+select count(cv.collision_id) as NumeroAccidentes, v.vehicle_make
 from pecl3.final.final_colisionVehiculos as cv left join pecl3.final.final_vehiculos as v on cv.vehicle_id = v.vehicle_id
 group by v.vehicle_make
 order by NumeroAccidentes asc
 limit 3;
 
-select count(cv.unique_id) as NumeroAccidentes, v.vehicle_type
+select count(cv.collision_id) as NumeroAccidentes, v.vehicle_type
 from pecl3.final.final_colisionVehiculos as cv left join pecl3.final.final_vehiculos as v on cv.vehicle_id = v.vehicle_id
 group by v.vehicle_type
 order by NumeroAccidentes asc
 limit 3;
 
 -- Sentencia 8
-select count(cv.unique_id) as NumeroAccidentes, v.vehicle_make
+select count(cv.collision_id) as NumeroAccidentes, v.vehicle_make
 from pecl3.final.final_colisionVehiculos as cv left join pecl3.final.final_vehiculos as v on cv.vehicle_id = v.vehicle_id
 group by v.vehicle_make
 order by vehicle_make asc;
