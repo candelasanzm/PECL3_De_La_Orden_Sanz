@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS pecl3.final.final_persona(
 
 CREATE TABLE IF NOT EXISTS pecl3.final.final_vehiculos(
     vehicle_id varchar(512) not null,
-    state_registration bpchar(2),
+    state_registration varchar (10),
     vehicle_year smallint check(vehicle_year between 1000 and 2024 or null),
     vehicle_type varchar(512),
     vehicle_model varchar(50),
@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS pecl3.final.final_colisionPersona(
 CREATE TABLE IF NOT EXISTS  pecl3.final.final_colisionVehiculos(
     collision_id varchar(10) not null,
     vehicle_id varchar(512) not null,
-    state_registration bpchar(2),
+    state_registration varchar(10),
     travel_direction varchar(20),
     vehicle_occupants numeric,
     driver_sex bpchar(1) check (driver_sex in ('U','F','M')),
@@ -168,10 +168,10 @@ SELECT
 FROM pecl3.temporal.temp_persona;
 
 INSERT INTO pecl3.final.final_vehiculos(vehicle_id,
-                      vehicle_year,
-                      vehicle_type,
-                      vehicle_model,
-                      vehicle_make)
+                                        vehicle_year,
+                                        vehicle_type,
+                                        vehicle_model,
+                                        vehicle_make)
 SELECT
     CAST(v.vehicle_id AS VARCHAR(512)),
     CAST(v.vehicle_year AS SMALLINT),
@@ -238,7 +238,7 @@ INSERT INTO pecl3.final.final_colisionVehiculos(collision_id,
 SELECT
     CAST(collision_id AS varchar(10)),
     CAST(vehicle_id AS varchar(512)),
-    CAST(state_registration AS bpchar(2)),
+    CAST(state_registration AS varchar(10)),
     CAST(travel_direction AS varchar(20)),
     CAST(vehicle_occupants AS numeric),
     CAST(driver_sex AS bpchar(1)),

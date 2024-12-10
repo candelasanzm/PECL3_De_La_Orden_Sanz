@@ -21,6 +21,12 @@ from pecl3.final.final_colisionpersona as cp
 where cp.person_id is NULL or length(cp.person_id) < 10;
 
 -- Ejercicio 3
+update pecl3.final.final_vehiculos as v
+set state_registration = cv.state_registration
+from pecl3.final.final_colisionvehiculos as cv
+where v.vehicle_id = cv.vehicle_id;
+
+alter table pecl3.final.final_colisionvehiculos drop column state_registration;
 
 -- Ejercicio 4
 update pecl3.final.final_vehiculos
