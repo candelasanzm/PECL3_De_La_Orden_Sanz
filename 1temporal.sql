@@ -1,10 +1,12 @@
 SET datestyle TO 'MDY';
 
+CREATE database pecl3;
+
 CREATE SCHEMA IF NOT EXISTS temporal;
 
 CREATE SCHEMA IF NOT EXISTS final;
 
-CREATE TABLE IF NOT EXISTS temporal.temp_accidentes(
+CREATE TABLE IF NOT EXISTS pecl3.temporal.temp_accidentes(
     crash_date TEXT,
     crash_time TEXT,
     borough TEXT,
@@ -36,7 +38,7 @@ CREATE TABLE IF NOT EXISTS temporal.temp_accidentes(
     vehicle_type_code_5 TEXT
 );
 
-CREATE TABLE IF NOT EXISTS temporal.temp_persona(
+CREATE TABLE IF NOT EXISTS pecl3.temporal.temp_persona(
     person_id TEXT,
     person_sex TEXT,
     person_lastName TEXT,
@@ -50,7 +52,7 @@ CREATE TABLE IF NOT EXISTS temporal.temp_persona(
     person_dob TEXT
 );
 
-CREATE TABLE IF NOT EXISTS temporal.temp_vehiculos(
+CREATE TABLE IF NOT EXISTS pecl3.temporal.temp_vehiculos(
     vehicle_id TEXT,
     vehicle_year TEXT,
     vehicle_type TEXT,
@@ -58,7 +60,7 @@ CREATE TABLE IF NOT EXISTS temporal.temp_vehiculos(
     vehicle_make TEXT
 );
 
-CREATE TABLE IF NOT EXISTS temporal.temp_colisionPersona(
+CREATE TABLE IF NOT EXISTS pecl3.temporal.temp_colisionPersona(
     unique_id TEXT,
     collision_id TEXT,
     crash_date TEXT,
@@ -82,7 +84,7 @@ CREATE TABLE IF NOT EXISTS temporal.temp_colisionPersona(
     person_sex TEXT
 );
 
-CREATE TABLE IF NOT EXISTS temporal.temp_colisionVehiculos(
+CREATE TABLE IF NOT EXISTS pecl3.temporal.temp_colisionVehiculos(
     unique_id TEXT,
     collision_id TEXT,
     crash_date TEXT,
@@ -110,22 +112,22 @@ CREATE TABLE IF NOT EXISTS temporal.temp_colisionVehiculos(
     contributing_factor_2 TEXT
 );
 
-COPY temporal.temp_accidentes
+COPY pecl3.temporal.temp_accidentes
 FROM 'C:\Collisions_Crashes_20241020.csv'
 WITH CSV HEADER NULL '' DELIMITER ',';
 
-COPY temporal.temp_persona
+COPY pecl3.temporal.temp_persona
 FROM 'C:\personas2.csv'
 WITH CSV HEADER NULL '' DELIMITER ';' QUOTE '"';
 
-COPY temporal.temp_vehiculos
+COPY pecl3.temporal.temp_vehiculos
 FROM 'C:\Vehicles.csv'
 WITH CSV HEADER NULL '' DELIMITER ';';
 
-COPY temporal.temp_colisionPersona
+COPY pecl3.temporal.temp_colisionPersona
 FROM 'C:\Collisions_Person_20241020.csv'
 WITH (FORMAT csv, HEADER true, DELIMITER ',', NULL '', QUOTE '"', ESCAPE '"');
 
-COPY temporal.temp_colisionVehiculos
+COPY pecl3.temporal.temp_colisionVehiculos
 FROM 'C:\Collisions_Vehicles_20241020.csv'
 WITH CSV HEADER NULL '' DELIMITER ',';
