@@ -58,9 +58,42 @@ set person_sex = 'U'
 where person_sex is NULL;
 
 -- Ejercicio 6
+alter table pecl3.final.final_persona add column person_age integer;
 
+create or replace function calcular_edad()
+returns trigger as $$
+begin
+    new.person_age := DATE_PART('year', age(new.person_dob));
+    return new;
+end;
+$$ language plpgsql;
+
+create trigger calcular_edad
+    before insert on pecl3.final.final_persona
+    for each row
+    execute function calcular_edad();
 
 -- Ejercicio 7
+alter table pecl3.final.final_vehiculos add column vehicle_accidents integer default 0;
+
+create or replace function calcular_accidentes()
+returns trigger as $$
+begin
+    update pecl3.final.final_vehiculos
+    set vehicle_accidents = ( select COUNT(*)
+                              from pecl3.final.final_colisionvehiculos
+                              where pecl3.final.final_colisionvehiculos.vehicle_id = new.vehicle_id )
+    where pecl3.final.final_vehiculos.vehicle_id = new.vehicle_id;
+    return new;
+end;
+$$ language plpgsql;
+
+create trigger calcular_accidentes
+    after insert or update on pecl3.final.final_colisionvehiculos
+    for each row
+    execute function calcular_accidentes();
+
+
 
 
 -- Ejercicio 8
