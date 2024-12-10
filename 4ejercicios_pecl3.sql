@@ -1,20 +1,20 @@
 -- Ejercicio 1
 delete
 from pecl3.final.final_vehiculos as v
-where v.vehicle_id is NULL or length(v.vehicle_id) < 10;
+where v.vehicle_id is NULL or v.vehicle_id = '' or length(v.vehicle_id) < 10;
 
 delete
 from pecl3.final.final_colisionVehiculos as cv
-where cv.vehicle_id is NULL or length(cv.vehicle_id) < 10;
+where cv.vehicle_id is NULL or cv.vehicle_id = '' or length(cv.vehicle_id) < 10;
 
 -- Ejercicio 2
 delete
 from pecl3.final.final_persona as p
-where p.person_id is NULL or length(p.person_id) < 10;
+where p.person_id is NULL or p.person_id = '' or length(p.person_id) < 10;
 
 delete
 from pecl3.final.final_colisionpersona as cp
-where cp.person_id is NULL or length(cp.person_id) < 10;
+where cp.person_id is NULL or cp.person_id = '' or length(cp.person_id) < 10;
 
 -- Ejercicio 3
 update pecl3.final.final_vehiculos as v
@@ -46,7 +46,7 @@ set state_registration = 'unknown'
 where state_registration is NULL;
 
 -- Ejercicio 5
-update pecl3.final.final_persona as p
+update pecl3.final.final_persona p
 set person_sex = cp.person_sex
 from pecl3.final.final_colisionpersona as cp
 where p.person_id = cp.person_id;
